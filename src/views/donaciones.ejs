@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Studia Med</title>
+    <link rel="icon" type="icon/png" href="images/faviconn.ico" />
+
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style4.css" />
+    <link rel="image" href="/public/images/" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Font Awesome JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+      crossorigin="anonymous"
+    ></script>
+    <script src="store.js" async></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar  -->
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <h3>Studia</h3>
+          <strong>ST</strong>
+        </div>
+
+        <ul class="list-unstyled components">
+          <li>
+            <a href="/profile">
+              <i class="fas fa-home"></i>
+              Inicio
+            </a>
+            <a href="/about">
+              <i class="fas fa-briefcase"></i>
+              Dynamic Database
+            </a>
+            <a href="/becas">
+              <i class="fas fa-briefcase"></i>
+              Becas
+            </a>
+            <a href="/donaciones">
+              <i class="fas fa-copy"></i>
+              Donaciones
+            </a>
+            <a href="/depositos">
+              <i class="fas fa-copy"></i>
+              Depositos y Pagos
+            </a>
+            <a
+              href="#pageSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+            >
+              <i class="fas fa-copy"></i>
+              Programas
+            </a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+              <li>
+                <a href="#">Programa 1</a>
+              </li>
+              <li>
+                <a href="#">Programa 2</a>
+              </li>
+              <li>
+                <a href="#">Programa 3</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-image"></i>
+              Portfolio
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-question"></i>
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-paper-plane"></i>
+              Contacto
+            </a>
+          </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+          <li>
+            <a href="studia.com.mx" class="download">Donaciones</a>
+          </li>
+          <li>
+            <a href="https://studia.com.mx" class="article">Studia.com.mx</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Page Content  -->
+      <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+              <i class="fas fa-align-left"></i>
+              <span>Menu</span>
+            </button>
+            <button
+              class="btn btn-dark d-inline-block d-lg-none ml-auto"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <%if (user) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/profile">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Exit</a>
+                </li>
+                <% } else { %>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/signin">Sign In</a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="/signup"
+                    tabindex="-1"
+                    aria-disabled="true"
+                    >Sign Up</a
+                  >
+                </li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <section class="container content-section">
+            <h2 class="section-header">MUSIC</h2>
+            <div class="shop-items">
+              <div class="shop-item">
+                <span class="shop-item-title">Album 1</span>
+                <img class="shop-item-image" src="Images/Album 1.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$12.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+              <div class="shop-item">
+                <span class="shop-item-title">Album 2</span>
+                <img class="shop-item-image" src="Images/Album 2.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$14.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+              <div class="shop-item">
+                <span class="shop-item-title">Album 3</span>
+                <img class="shop-item-image" src="Images/Album 3.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$9.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+              <div class="shop-item">
+                <span class="shop-item-title">Album 4</span>
+                <img class="shop-item-image" src="Images/Album 4.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$19.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="container content-section">
+            <h2 class="section-header">MERCH</h2>
+            <div class="shop-items">
+              <div class="shop-item">
+                <span class="shop-item-title">T-Shirt</span>
+                <img class="shop-item-image" src="Images/Shirt.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$19.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+              <div class="shop-item">
+                <span class="shop-item-title">Coffee Cup</span>
+                <img class="shop-item-image" src="Images/Cofee.png" />
+                <div class="shop-item-details">
+                  <span class="shop-item-price">$6.99</span>
+                  <button
+                    class="btn btn-primary shop-item-button"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="container content-section">
+            <h2 class="section-header">CARTs</h2>
+            <div class="cart-row">
+              <span class="cart-item cart-header cart-column">ITEM</span>
+              <span class="cart-price cart-header cart-column">PRICE</span>
+              <span class="cart-quantity cart-header cart-column"
+                >QUANTITY</span
+              >
+            </div>
+            <div class="cart-items"></div>
+            <div class="cart-total">
+              <strong class="cart-total-title">Total $</strong>
+              <span class="cart-total-price" id="my-monto">0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button">
+              PURCHASE
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Popper.JS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+      integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap JS -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+        });
+      });
+
+      function purchaseClicked() {
+        const MY_MONTO = document.getElementById("my-monto").innerHTML;
+        const RENPLACE = MY_MONTO.replace("$", "");
+        const FINAL_MONTO = parseFloat(RENPLACE);
+
+        console.log("FINAL_MONTO", FINAL_MONTO);
+        if (FINAL_MONTO > 10) {
+            let stripe = Stripe(
+          "pk_test_51IVmGbIVTR4RMuNKpL76BsaLZd9dUdE6CsyTq5QHzpUy3qhFQbOfJs29IspKhZRJL8fOPxvE1DFxm7cZasliN4Db00p18Aqz1F"
+        );
+
+        fetch(`/create-checkout-session/${FINAL_MONTO}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+          })
+          .then(function (result) {
+            // If redirectToCheckout fails due to a browser or network
+            // error, you should display the localized error message to your
+            // customer using error.message.
+            if (result.error) {
+              alert(result.error.message);
+            }
+          })
+          .catch(function (error) {
+            console.error("Error:", error);
+          });
+
+        var cartItems = document.getElementsByClassName("cart-items")[0];
+          while (cartItems.hasChildNodes()) {
+               cartItems.removeChild(cartItems.firstChild);
+             }
+         updateCartTotal();
+        }else{
+                alert("no monto")
+        }
+       
+      }
+
+
+
+      function updateCartTotal() {
+        var cartItemContainer = document.getElementsByClassName(
+          "cart-items"
+        )[0];
+        var cartRows = cartItemContainer.getElementsByClassName("cart-row");
+        var total = 0;
+        for (var i = 0; i < cartRows.length; i++) {
+          var cartRow = cartRows[i];
+          var priceElement = cartRow.getElementsByClassName("cart-price")[0];
+          var quantityElement = cartRow.getElementsByClassName(
+            "cart-quantity-input"
+          )[0];
+          var price = parseFloat(priceElement.innerText.replace("$", ""));
+          var quantity = quantityElement.value;
+          total = total + price * quantity;
+        }
+        total = Math.round(total * 100) / 100;
+        document.getElementsByClassName("cart-total-price")[0].innerText =
+          "$" + total;
+      }
+    </script>
+  </body>
+</html>

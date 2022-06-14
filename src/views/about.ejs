@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>STUDIA</title>
+    <link rel="icon" type="icon/png" href="images/faviconn.ico">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style4.css">
+    <link rel="stylesheet" href="assets/css/treeTide.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Studia Med</h3>
+                <strong>SM</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                                                  
+                <li>
+                    <a href="/profile">
+                        <i class="fas fa-home"></i>
+                        Inicio
+                    </a>
+                    <a href="/about">
+                        <i class="fas fa-briefcase"></i>
+                        Dynamic Database
+                    </a>
+                    <a href="/becas">
+                      <i class="fas fa-briefcase"></i>
+                      Becas
+                  </a>
+                    <a href="/donaciones">
+                        <i class="fas fa-copy"></i>
+                        Donaciones
+                    </a>      
+                    <a href="/depositos">
+                      <i class="fas fa-copy"></i>
+                      Depositos y Pagos
+                    </a> 
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        Programas
+                    </a>                    
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Programa 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Programa 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Programa 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-image"></i>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question"></i>
+                        FAQ
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-paper-plane"></i>
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Donaciones</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Studia.com.mx</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <%if (user) { %>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="/profile">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="/logout">Exit</a>
+                                </li>
+                              <% } else { %>
+                    
+                              <li class="nav-item">
+                                <a class="nav-link" href="/signin">Inicia</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="/signup" tabindex="-1" aria-disabled="true">Registrate</a>
+                              </li>
+                              <% } %>
+                         </ul>
+                    </div>
+                </div>
+            </nav>          
+            <div id="treeM"></div> 
+        </div>
+    </div>
+    <script>
+        const data = {
+  name: "Medicina",
+  children: [
+    {
+      name: "Primer Semestre",
+      children: [
+        {
+          name: "Anatomíaa",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Embriología",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Bioquímica",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Introducción al pensamiento científico",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Desarrollo de habilidades para estudiar",
+          children: [
+            { name: "BetweennessCentrality", value: 3534 },
+            { name: "LinkDistance", value: 5731 },
+            { name: "MaxFlowMinCut", value: 7840 },
+            { name: "ShortestPaths", value: 5914 },
+            { name: "SpanningTree", value: 3416 }
+          ]
+        },
+        {
+          name: "Psicología Médica",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Inglés Inicial Medio",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Matemáticas Básicas",
+          children: [
+            { name: "AgglomerativeCluster", value: 3938 },
+            { name: "CommunityStructure", value: 3812 },
+            { name: "HierarchicalCluster", value: 6714 },
+            { name: "MergeEdge", value: 743 }
+          ]
+        },
+        {
+          name: "Introducción a las Tecnologías de la Información",
+          children: [{ name: "AspectRatioBanker", value: 7074 }]
+        }
+      ]
+    },
+    {
+      name: "Segundo semestre",
+      children: [
+        {
+          name: "Anatomía II",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Genética",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Bioquímica II",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Histología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Bioestadística",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Medio Ambiente y Desarrollo Sustentable",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Inglés Inicial Avanzado",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Tercer semestre",
+      children: [
+        {
+          name: "Parasitología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Farmacología Básica",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Físiología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Anatomía Patológica",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Salud Pública",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Tamaulipas y los Retos del Desarrollo",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Inglés Intermedio Inicial",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Metodología de la Investigación",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Cuarto semestre",
+      children: [
+        {
+          name: "Microbiología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Inmunología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Fisiología II",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Técnica Quirúrgica",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Propedéutica Médico-Quirúrgica",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Epidemiología",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+        {
+          name: "Inglés Intermedio Avanzado",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },{
+          name: "Farmacología Clínica",
+          children: [
+            { name: "ArrayInterpolator", value: 1983 },
+            { name: "ColorInterpolator", value: 2047 },
+            { name: "DateInterpolator", value: 1375 },
+            { name: "Interpolator", value: 8746 },
+            { name: "MatrixInterpolator", value: 2202 },
+            { name: "NumberInterpolator", value: 1382 },
+            { name: "ObjectInterpolator", value: 1629 },
+            { name: "PointInterpolator", value: 1675 },
+            { name: "RectangleInterpolator", value: 2042 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Quinto semestre",
+      children: [
+        {
+          name: "Radiología e Imagenología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Respiratorio-Teórica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Infectología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Digestivo-Teórica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Propedéutica Médico-Quirúrgica II",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Patología Quirúrgica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Inglés Médico Básico Inicial",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Optativa",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Sexto semestre",
+      children: [
+        {
+          name: "Bioética",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Clínica Respiratoria",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Clínica Quirúrgica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Clínica Digestiva",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Hematología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Anestesiología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Inglés Médico Básico Avanzado",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Optativa II",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Séptimo semestre",
+      children: [
+        {
+          name: "Endocrinología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Ginecoobstetricia Teórica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Cirugía",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Oftalmología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Cardiología Teórica",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Otorrinolaringología",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Inglés Técnico Médico Inicial",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Optativa III",
+          children: [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Octavo semestre",
+      children: [
+        {
+          name: "Oncología",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Clínica de Ginecoobstetricia",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Cirugía II",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Dermatología",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Clínica de Cardiología",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Inglés Técnico Médico Avanzado",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+        {
+          name: "Optativa IV",
+          children : [
+            { name: "Converters", value: 721 },
+            { name: "DelimitedTextConverter", value: 4294 },
+            { name: "GraphMLConverter", value: 9800 },
+            { name: "IDataConverter", value: 1314 },
+            { name: "JSONConverter", value: 2220 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Noveno semestre",
+      children: [
+        {
+          name: "Medicina Legal y Laboral",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Urología",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Neurología Teórica",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Pediatría Teórica",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Traumatología y Ortopedia Teórica",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Geriatría",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Optativa V",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+      ]
+    },
+    {
+      name: "Décimo semestre",
+      children: [
+        {
+          name: "Clínica de Atención Primaria de la Salud",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Nefrología",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Clínica de Neurología",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Clínica de Pediatría",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Traumatología y Ortopedia Clínica",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Psiquiatría",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+        {
+          name: "Optativa VI",
+          children: [
+            { name: "add", value: 593 },
+            { name: "and", value: 330 },
+            { name: "average", value: 287 },
+            { name: "count", value: 277 },
+            { name: "distinct", value: 292 },
+            { name: "div", value: 595 },
+            { name: "eq", value: 594 },
+            { name: "fn", value: 460 },
+          ]
+        },
+      ]
+    },
+    {
+      name: "Undécimo semestre",
+      children: [
+        {
+          name: "Internado de Pregrado I",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Duodécimo semestre",
+      children: [
+        {
+          name: "Internado de Pregrado I",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Optativas",
+      children: [
+        {
+          name: "Urgencias Médicas",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+        {
+          name: "Salud Reproductiva",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+        {
+          name: "Reumatología",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+        {
+          name: "Nutrición",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+        {
+          name: "Administración Médica",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+        {
+          name: "Práctica Médica Elemental",
+          children: [
+            { name: "DenseMatrix", value: 3165 },
+            { name: "IMatrix", value: 2815 },
+            { name: "SparseMatrix", value: 3366 }
+          ]
+        },
+      ]
+    }
+  ]
+};
+
+const margin = { top: 10, right: 120, bottom: 10, left: 40 };
+const width = d3.width || 960;
+const root = d3.hierarchy(data);
+const dx = 10;
+const dy = width / 6;
+const tree = d3.tree().nodeSize([dx, dy]);
+const diagonal = d3
+  .linkHorizontal()
+  .x((d) => d.y)
+  .y((d) => d.x);
+
+root.x0 = dy / 2;
+root.y0 = 0;
+root.descendants().forEach((d, i) => {
+  d.id = i;
+  d._children = d.children;
+  // if (d.depth && d.data.name.length !== 7) d.children = null;
+});
+
+tree(root);
+
+const svg = d3
+  .create("svg")
+  .attr("viewBox", [-margin.left, -margin.top, width, dx])
+  .style("font", "10px sans-serif")
+  .style("user-select", "none");
+
+const gLink = svg
+  .append("g")
+  .attr("fill", "none")
+  .attr("stroke", "#555")
+  .attr("stroke-opacity", 0.4)
+  .attr("stroke-width", 1.5);
+
+const gNode = svg
+  .append("g")
+  .attr("cursor", "pointer")
+  .attr("pointer-events", "all");
+
+update(root);
+
+document.querySelector("#treeM").appendChild(svg.node());
+
+function update(source) {
+  const duration = d3.event && d3.event.altKey ? 2500 : 250;
+  const nodes = root.descendants().reverse();
+  const links = root.links();
+
+  // Compute the new tree layout.
+
+  let left = root;
+  let right = root;
+  root.eachBefore((node) => {
+    if (node.x < left.x) left = node;
+    if (node.x > right.x) right = node;
+  });
+
+  const height = right.x - left.x + margin.top + margin.bottom;
+
+  const transition = svg
+    .transition()
+    .duration(duration)
+    .attr("viewBox", [-margin.left, left.x - margin.top, width, height])
+    .tween(
+      "resize",
+      window.ResizeObserver ? null : () => () => svg.dispatch("toggle")
+    );
+
+  // Update the nodes…
+  const node = gNode.selectAll("g").data(nodes, (d) => d.id);
+
+  // Enter any new nodes at the parent's previous position.
+  const nodeEnter = node
+    .enter()
+    .append("g")
+    .attr("transform", (d) => `translate(${source.y0},${source.x0})`)
+    .attr("fill-opacity", 0)
+    .attr("stroke-opacity", 0)
+    .on("click", (event, d) => {
+      
+      window.open('/'+d.data.name)
+      console.log(d.data.name)
+      d.children = d.children ? null : d._children;
+      update(d);
+    });
+
+  nodeEnter
+    .append("circle")
+    .attr("r", 2.5)
+    .attr("fill", (d) => (d._children ? "#555" : "#999"))
+    .attr("stroke-width", 10);
+
+  nodeEnter
+    .append("text")
+    .attr("dy", "0.31em")
+    .attr("x", (d) => (d._children ? -6 : 6))
+    .attr("text-anchor", (d) => (d._children ? "end" : "start"))
+    .text((d) => d.data.name)
+    .clone(true)
+    .lower()
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-width", 3)
+    .attr("stroke", "white");
+
+  // Transition nodes to their new position.
+  node
+    .merge(nodeEnter)
+    .transition(transition)
+    .attr("transform", (d) => `translate(${d.y},${d.x})`)
+    .attr("fill-opacity", 1)
+    .attr("stroke-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  node
+    .exit()
+    .transition(transition)
+    .remove()
+    .attr("transform", (d) => `translate(${source.y},${source.x})`)
+    .attr("fill-opacity", 0)
+    .attr("stroke-opacity", 0);
+
+  // Update the links…
+  const link = gLink.selectAll("path").data(links, (d) => d.target.id);
+
+  // Enter any new links at the parent's previous position.
+  const linkEnter = link
+    .enter()
+    .append("path")
+    .attr("d", (d) => {
+      const o = { x: source.x0, y: source.y0 };
+      return diagonal({ source: o, target: o });
+    });
+
+  // Transition links to their new position.
+  link.merge(linkEnter).transition(transition).attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link
+    .exit()
+    .transition(transition)
+    .remove()
+    .attr("d", (d) => {
+      const o = { x: source.x, y: source.y };
+      return diagonal({ source: o, target: o });
+    });
+
+  // Stash the old positions for transition.
+  root.eachBefore((d) => {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+    </script>    
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html> 
